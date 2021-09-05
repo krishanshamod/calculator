@@ -12,7 +12,9 @@ public class OperationFactory {
             operation = new SubOperation();
         } else if (operator.equals("mul")) {
             operation = new MulOperation();
-        }
+        } else if (operator.equals("div")) {
+        operation = new DivOperation();
+        } //OCP violated
 
         return operation;
     }

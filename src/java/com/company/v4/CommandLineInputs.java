@@ -18,7 +18,8 @@ public class CommandLineInputs {
 
         String operator = args[0];
 
-        if (!(operator.equals("add") || operator.equals("sub") || operator.equals("mul"))) {
+        // OCP violated
+        if (!(operator.equals("add") || operator.equals("sub") || operator.equals("mul") || operator.equals("div"))) {
             System.out.println("Please provide add,sub or mul as the argument");
             return ""; //Will change in the future
         }
