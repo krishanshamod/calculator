@@ -1,6 +1,7 @@
 package com.company.v5;
 
 import com.company.v5.input.Inputs;
+import com.company.v5.operation.InvalidOperationException;
 import com.company.v5.operation.Operation;
 import com.company.v5.operation.OperationFactory;
 import com.company.v5.repository.NumberRepository;
@@ -26,7 +27,13 @@ public class CalculatorApp {
         String operator = inputs.getOperator();
         Double[] numbers = numberRepository.getNumbers();
         Operation operation = operationFactory.getInstance(operator);
-        Double result = operation.execute(numbers);
+        Double result = null;
+        try {
+            result = operation.execute(numbers);
+        } catch (InvalidOperationException e) {
+            ui.showMessage("Error Occurred! " + e.getMessage());
+            return;
+        }
         ui.showMessage("The result is " + result);
 
     }
