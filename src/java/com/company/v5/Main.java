@@ -9,9 +9,8 @@ import com.company.v5.ui.CmdLineUI;
 import com.company.v5.ui.UI;
 
 public class Main {
-
     //Main class is the coordinator now.
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         Inputs inputs = new CommandLineInputs(args);
         NumberRepository numberRepository = new FileNumberRepository();
@@ -19,6 +18,5 @@ public class Main {
         UI ui = new CmdLineUI();
         CalculatorApp app = new CalculatorApp(inputs, numberRepository, operationFactory, ui);
         app.execute();
-
     }
 }

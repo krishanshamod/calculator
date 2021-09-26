@@ -1,12 +1,13 @@
 package com.company.v5;
 
 import com.company.v5.input.Inputs;
+import com.company.v5.input.InvalidInputException;
 import com.company.v5.operation.InvalidOperationException;
 import com.company.v5.operation.Operation;
 import com.company.v5.operation.OperationFactory;
 import com.company.v5.repository.NumberRepository;
+import com.company.v5.repository.NumberRepositoryException;
 import com.company.v5.ui.UI;
-import java.io.IOException;
 
 public class CalculatorApp {
 
@@ -22,19 +23,15 @@ public class CalculatorApp {
         this.ui = ui;
     }
 
-    public void execute() throws IOException { // we will change this in the future
-
-        String operator = inputs.getOperator();
-        Double[] numbers = numberRepository.getNumbers();
-        Operation operation = operationFactory.getInstance(operator);
-        Double result = null;
+    public void execute() {
         try {
-            result = operation.execute(numbers);
-        } catch (InvalidOperationException e) {
+            String operator = inputs.getOperator();
+            Double[] numbers = numberRepository.getNumbers();
+            Operation operation = operationFactory.getInstance(operator);
+            Double result = operation.execute(numbers);
+            ui.showMessage("The result is " + result);
+        } catch (InvalidOperationException | InvalidInputException | NumberRepositoryException e) {
             ui.showMessage("Error Occurred! " + e.getMessage());
-            return;
         }
-        ui.showMessage("The result is " + result);
-
     }
 }
